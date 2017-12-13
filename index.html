@@ -16,6 +16,60 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
+        <ul class="nav nav-tabs">
+          <li class="active">
+            <a data-toggle="tab" href="#home">Вибір папки</a>
+          </li>
+          <li>
+            <a data-toggle="tab" href="#menu1">Графік</a>
+          </li>
+          <li>
+            <a data-toggle="tab" href="#menu2">Menu 2</a>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+          <div id="home" class="tab-pane fade in active">
+            <div class="">
+              <div class="row">
+                <div class="col-xs-12">
+                  <button class="btn" id="chooseFolder">Вибрати папку</button>
+                  <span id="path" class="form-control"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <table class="table table-bordered" id="myTable">
+                    <thead>
+                      <tr>
+                        <th>Ім'я</th>
+                        <th>Розмір,байти</th>
+                        <th>Кількість слів</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="menu1" class="tab-pane fade">
+              <div id="chartContainer" style="height: 80vh; width: 100%;"></div>
+          </div>
+          <div id="menu2" class="tab-pane fade">
+            <h3>Menu 2</h3>
+            <p>Some content in menu 2.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
         <button class="btn" id="chooseFolder">Вибрати папку</button>
         <span id="path" class="form-control"></span>
       </div>
@@ -41,9 +95,12 @@
         <div id="chartContainer" style="height: 500px; width: 100%;"></div>
       </div>
     </div>
-  </div>
- 
-  <script>window.$ = window.jQuery = require('jquery');</script>
+  </div> -->
+
+  <script>
+    window.$ = window.jQuery = require('jquery');
+  </script>
+  <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
   <script>
     // You can also require other files to run in this process

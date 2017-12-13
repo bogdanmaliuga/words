@@ -2,21 +2,23 @@ const app = require('electron').remote;
 const dialog = app.dialog;
 const fs = require('fs');
 const dir = require('node-dir');
+const path = require('path');
+const readfiles = require('readfiles');
 let $ = require('jquery')
 let data = [];
 let dataPoints=[];
 let index = 0;
+let count = 0;
 
 let options = {
     exportEnabled: true,
     animationEnabled: true,
     title: {
-        text: "jQuery Spline Area Chart"
+        text: "Графік"
     },
     data: [{
 		type: "spline",
-		dataPoints: [
-		]
+		dataPoints: []
 	}]
 };
 
@@ -35,7 +37,18 @@ function countWords(s) {
     return s.split(' ').length;
 }
 
+function getCountOfFiles(path){
+    
+    readfiles('/path/to/dir/', {
+        filter: '*.json',
+        readContents: false
+      }, function (err, content, filename) {
+        if (err) throw err;
+        console.log('File ' + filename);
+      });
+}
 function readFilesFromDir(path) {
+    
     index = 0;
     $('.loader-wrap').css('display', 'block');
     data = [];
@@ -51,7 +64,7 @@ function readFilesFromDir(path) {
             throw err
         };
         index++;
-        $('.count').text(index.toString());
+        $('.count').text(index.toString()+"/"+count.toString);
         $('#myTable tr:last').after('<tr><td>' +
             filename +
             '</td><td>' +
@@ -80,8 +93,8 @@ function readFilesFromDir(path) {
             console.log('finished reading files:');
             dataPoints.sort(compare)
             options.data[0].dataPoints=dataPoints;
-            console.log(options);
             $("#chartContainer").CanvasJSChart(options);
+            
             $('.loader-wrap').css('display', 'none')
         });
 }
@@ -93,10 +106,20 @@ $('#chooseFolder').on('click', function () {
     }, function (filename) {
         if (filename) {
             $('#path').text(filename.toString());
+            getCountOfFiles(filename.toString());
             readFilesFromDir(filename.toString());
         } else {
             $('#path').text('Папку не вибрано');
 
         }
     });
+})
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    if($('#chartContainer').CanvasJSChart()){
+        if(e.target.hash=='#menu1'){
+            $('#chartContainer').CanvasJSChart().render();
+        }
+        
+    }
+   
 })

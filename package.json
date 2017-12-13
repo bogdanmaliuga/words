@@ -4,7 +4,8 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-packager . myApp --platform=win32 --arch=x64 --version=0.33.3 --app-version=0.1.0 --out=dist --ignore=dist --prune"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -23,6 +24,7 @@
     "bootstrap": "^3.3.7",
     "fs": "0.0.1-security",
     "jquery": "^3.2.1",
-    "node-dir": "^0.1.17"
+    "node-dir": "^0.1.17",
+    "readfiles": "^1.0.0"
   }
 }
